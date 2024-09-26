@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Hotéis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <style>
+        .card {
+            margin: 20px 0; /* Espaçamento entre os cartões */
+        }
+        .has-background-light {
+            background-color: #fff; /* Fundo branco para os cartões */
+        }
+        .has-background-info {
+            background-color: #00d1b2; /* Cor de fundo para o cabeçalho */
+            color: white; /* Texto branco */
+        }
+        .star {
+            color: #ffdd57; /* Cor das estrelas */
+            font-size: 1.5em; /* Tamanho das estrelas */
+        }
+        .card-footer-item {
+            color: #00d1b2; /* Cor do texto dos links */
+        }
+        .card-footer-item:hover {
+            text-decoration: underline; /* Efeito ao passar o mouse */
+        }
+    </style>
+</head>
+<body class="container">
+
+<h1 class="title has-text-centered">Lista de Hotéis</h1>
+
+<section class="grid is-col-min-15">
+    <div class="card cell has-background-light" th:each="hotel: ${hotels}">
+        <header class="card-header has-background-info">
+            <p class="card-header-title" th:text="${hotel.title}"></p>
+            <span class="star" th:each="star: ${#numbers.sequence(1, 5)}" th:text="${hotel.score >= star ? '★' : '☆'}"></span>
+        </header>
+
+        <div class="card-content">
+            <div class="content" th:text="${hotel.description}"></div>
+        </div>
+
+        <footer class="card-footer">
+            <a href="#" class="card-footer-item">Reservar</a>
+            <a href="#" class="card-footer-item">Detalhes</a>
+            <a href="#" class="card-footer-item">Excluir</a>
+        </footer>
+
+    </div>
+</section>
+
+</body>
+</html>
